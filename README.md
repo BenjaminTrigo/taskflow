@@ -90,7 +90,7 @@ npm install
 
 ```bash
 # Iniciar servidor de desarrollo
-npm start
+npm start / ng serve
 ```
 
 La aplicación estará disponible en `http://localhost:4200`
@@ -99,10 +99,9 @@ La aplicación estará disponible en `http://localhost:4200`
 
 ```bash
 # Compilar para producción
-npm run build
+npm run build / ng build
 ```
 
-Los archivos compilados se generarán en el directorio `dist/`
 
 ## Modelo de Datos
 
@@ -124,7 +123,6 @@ interface Task {
 - `/task/new` - Crear nueva tarea
 - `/task/:id` - Editar tarea existente
 
-## Características Técnicas Destacadas
 
 ### Servicio de Tareas (TaskService)
 - Uso de Signals para reactividad
