@@ -1,73 +1,156 @@
-# taskflow
-Aplicacion de lista de tareas.
+# TaskFlow - Gestor de Tareas Personal
 
-Repositorio de Prueba Tecnica.
+Aplicación web de gestión de tareas personales desarrollada con Angular 21.
 
--- Instalaciones
-1- Clonar el reposito
-2- Instalar Nodejs npm install @angular/cli
+## Características Implementadas
 
+### Funcionalidades Principales
 
-1. Listado de Tareas
-• Mostrar todas las tareas en una lista
-• Cada tarea debe mostrar: título, descripción (truncada), fecha de creación y estado
-• Indicador visual del estado (pendiente/completada)
-2. Crear Nueva Tarea
-Formulario con los campos:
-• Título (obligatorio, mínimo 3 caracteres)
-• Descripción (opcional, máximo 200 caracteres)
-• Prioridad (baja, media, alta)
-• Validaciones en tiempo real con mensajes de error
-• Botón de guardar deshabilitado si el formulario es inválido
-3. Editar Tarea
-• Permitir modificar cualquier campo de una tarea existente
-• Precargar los datos actuales en el formulario
-4. Eliminar Tarea
+1. **Listado de Tareas**
+   - Visualización de todas las tareas en una lista organizada
+   - Cada tarea muestra: título, descripción truncada, fecha de creación, estado y prioridad
+   - Indicadores visuales distintivos para tareas pendientes y completadas
+   - Estadísticas en tiempo real (total, pendientes, completadas)
 
-• Confirmación antes de eliminar
-• Feedback visual al usuario tras la eliminación
-5. Marcar como Completada
-• Toggle para cambiar el estado de la tarea
-• Estilo visual diferente para tareas completadas
-6. Filtros Básicos
-• Filtrar por estado: Todas / Pendientes / Completadas
-• Los filtros deben actualizar la vista en tiempo real
+2. **Crear Nueva Tarea**
+   - Formulario reactivo con validaciones en tiempo real
+   - Campos:
+     - Título (obligatorio, mínimo 3 caracteres)
+     - Descripción (opcional, máximo 200 caracteres con contador)
+     - Prioridad (baja, media, alta)
+   - Botón de guardar deshabilitado cuando el formulario es inválido
+   - Mensajes de error descriptivos
 
+3. **Editar Tarea**
+   - Modificación de cualquier campo de tareas existentes
+   - Precarga automática de datos actuales en el formulario
+   - Mismo formulario usado para crear y editar (reutilización de código)
 
-Requisito Descripción
-Angular Versión 17 o superior
-Standalone Components Utilizar la arquitectura de componentes standalone
-Reactive Forms Para todos los formularios
-Routing Mínimo 2 rutas (lista de tareas y crear/editar tarea)
-Servicios Al menos un servicio para la lógica de negocio
-TypeScript Tipado estricto preferiblemente, interfaces para los modelos
-Persistencia LocalStorage para guardar las tareas
+4. **Eliminar Tarea**
+   - Confirmación obligatoria antes de eliminar
+   - Feedback visual inmediato tras la eliminación
 
+5. **Marcar como Completada**
+   - Checkbox para alternar el estado de la tarea
+   - Estilo visual diferenciado para tareas completadas (opacidad, tachado)
 
+6. **Filtros en Tiempo Real**
+   - Filtrar por estado: Todas / Pendientes / Completadas
+   - Actualización instantánea de la vista al cambiar filtros
+   - Indicador visual del filtro activo
+
+### Tecnologías Utilizadas
+
+- **Angular 21** - Framework principal
+- **Standalone Components** - Arquitectura moderna de Angular
+- **Reactive Forms** - Manejo de formularios con validaciones
+- **Angular Router** - Navegación entre vistas
+- **TypeScript** - Tipado estricto con interfaces
+- **LocalStorage** - Persistencia de datos en el navegador
+- **Signals** - Manejo reactivo del estado
+
+## Estructura del Proyecto
+
+```
 src/
-■■■ app/
-■ ■■■ components/
-■ ■ ■■■ task-list/
-■ ■ ■■■ task-form/
-■ ■ ■■■ task-item/
-■ ■ ■■■ task-filters/
-■ ■■■ services/
-■ ■ ■■■ task.service.ts
-■ ■■■ models/
-■ ■ ■■■ task.model.ts
-■ ■■■ app.component.ts
-■ ■■■ app.routes.ts
-■ ■■■ app.config.ts
-■■■ assets/
-■■■ styles.css
+├── app/
+│   ├── components/
+│   │   ├── task-list/
+│   │   │   └── task-list.component.ts
+│   │   ├── task-form/
+│   │   │   └── task-form.component.ts
+│   │   ├── task-item/
+│   │   │   └── task-item.component.ts
+│   │   └── task-filters/
+│   │       └── task-filters.component.ts
+│   ├── services/
+│   │   └── task.service.ts
+│   ├── models/
+│   │   └── task.model.ts
+│   ├── app.routes.ts
+│   └── app.config.ts
+├── global_styles.css
+└── index.html
+```
 
+## Instalación y Uso
 
+### Requisitos Previos
+- Node.js (versión 18 o superior)
+- npm
+
+### Instalación
+
+```bash
+# Instalar dependencias
+npm install
+```
+
+### Desarrollo
+
+```bash
+# Iniciar servidor de desarrollo
+npm start
+```
+
+La aplicación estará disponible en `http://localhost:4200`
+
+### Compilación
+
+```bash
+# Compilar para producción
+npm run build
+```
+
+Los archivos compilados se generarán en el directorio `dist/`
+
+## Modelo de Datos
+
+```typescript
 interface Task {
-id: string;
-title: string;
-description?: string;
-priority: 'low' | 'medium' | 'high';
-completed: boolean;
-createdAt: Date;
-updatedAt?: Date;
+  id: string;
+  title: string;
+  description?: string;
+  priority: 'low' | 'medium' | 'high';
+  completed: boolean;
+  createdAt: Date;
+  updatedAt?: Date;
 }
+```
+
+## Rutas de la Aplicación
+
+- `/` - Lista de tareas (vista principal)
+- `/task/new` - Crear nueva tarea
+- `/task/:id` - Editar tarea existente
+
+## Características Técnicas Destacadas
+
+### Servicio de Tareas (TaskService)
+- Uso de Signals para reactividad
+- Persistencia automática en LocalStorage
+- Operaciones CRUD completas
+- Generación automática de IDs únicos
+
+### Componentes
+- **TaskListComponent**: Vista principal con filtros y estadísticas
+- **TaskFormComponent**: Formulario reutilizable para crear/editar
+- **TaskItemComponent**: Tarjeta individual de tarea con acciones
+- **TaskFiltersComponent**: Controles de filtrado
+
+### Validaciones
+- Título: requerido y mínimo 3 caracteres
+- Descripción: máximo 200 caracteres con contador visual
+- Prioridad: valor requerido con opciones predefinidas
+
+### Diseño UX
+- Interfaz limpia y moderna con gradiente de fondo
+- Tarjetas con efectos hover para mejor interactividad
+- Badges de colores para prioridades (azul/amarillo/rojo)
+- Estados vacíos informativos con mensajes contextuales
+- Diseño responsive para diferentes dispositivos
+- Transiciones suaves en todos los elementos interactivos
+
+## Desarrollador
+
+Aplicación desarrollada como parte de una prueba técnica para Desarrollador Frontend Angular (Junior).
